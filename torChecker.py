@@ -17,8 +17,9 @@ def validateFile(list_path):
                 try:                                    # Then try to execute the following command...
                     line = line.replace("\r","")        # If the line has "\r" too, remove it
                 finally:                                # Then...
-                    checkTor(line)                      # check if the IP is a Tor node
+                    checkTor2(line)                      # check if the IP is a Tor node
 
+""" # --- DISCONTINUED FUNCTION ---
 def checkTor(ip):       # This method uses a very simple linear search algorithm... and it is quite slow. --- NEEDS TO BE IMPROVED --- https://stackabuse.com/search-algorithms-in-python
     tor = urllib.request.urlopen('https://check.torproject.org/exit-addresses')     # Access Tor URL
     for ip_tor in tor:                      # For each line from the opened page do...
@@ -29,12 +30,22 @@ def checkTor(ip):       # This method uses a very simple linear search algorithm
                print(ip,"---> True")            # Bag & Tag
                return                           # Exit the function
     print(ip,"---> False")                  # If, after searching through all Tor node IPs, and the given IP is not found to be a Tor node, print "False"
+"""
+
+def checkTor2(ip):
+    page = urllib.request.urlopen('https://check.torproject.org/torbulkexitlist')   # Access Tor URL
+    content = page.read()       # Extract the content of the web page in bytes
+    ip = ip.encode('utf-8')     # Encode the string to byte
+    if ip in content:           # Search the page for the desired IP address
+        print(ip,"---> True")   # If the IP is a Tor node, print "True"
+        return                  # And exit the function
+    print(ip,"---> False")      # If it is not a Tor node, print "False"
 
 # Main code --- CODE EXECUTION STARTS HERE ---
 def main():
     parsed_args = parse_args()              # Args Init
     if parsed_args.target != None:          # If the argument "Target/-t" exists then...
-        checkTor(parsed_args.target)        # Check if the given IP is a Tor node
+        checkTor2(parsed_args.target)        # Check if the given IP is a Tor node
     elif parsed_args.list != None:          # If the argument "List/-l" exists then...
         validateFile(parsed_args.list)      # Check if the given IPs are Tor nodes
 
