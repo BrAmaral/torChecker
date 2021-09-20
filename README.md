@@ -1,4 +1,4 @@
-# torChecker - A Tor Relay Node checking tool
+# torChecker - A Tor Relay IP checking tool
 This is a simple python3 tool to check if an IP address is a Tor Relay Node or not.
 
 ## Features
