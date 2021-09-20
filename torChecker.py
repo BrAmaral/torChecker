@@ -37,9 +37,9 @@ def checkTor2(ip):
     content = page.read()       # Extract the content of the web page in bytes
     ip = ip.encode('utf-8')     # Encode the string to byte
     if ip in content:           # Search the page for the desired IP address
-        print(ip,"---> True")   # If the IP is a Tor node, print "True"
+        print(ip.decode('utf-8'),"---> True")   # If the IP is a Tor node, print "True"
         return                  # And exit the function
-    print(ip,"---> False")      # If it is not a Tor node, print "False"
+    print(ip.decode('utf-8'),"---> False")      # If it is not a Tor node, print "False"
 
 # Main code --- CODE EXECUTION STARTS HERE ---
 def main():
