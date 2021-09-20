@@ -1,5 +1,5 @@
 # torChecker - A Tor Relay IP checking tool
-This is a simple python3 tool to check if an IP address is a Tor Relay Node or not.
+This is a simple python3 tool that checks if an IP address is a Tor Relay Node or not.
 
 ## Features
 - Single target input
